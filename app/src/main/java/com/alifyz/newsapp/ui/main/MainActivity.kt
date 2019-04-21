@@ -1,7 +1,8 @@
-package com.alifyz.jetpack_training
+package com.alifyz.newsapp.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.alifyz.newsapp.R
 
 class MainActivity : AppCompatActivity() {
 

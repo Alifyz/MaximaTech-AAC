@@ -1,4 +1,4 @@
-package com.alifyz.jetpack_training
+package com.alifyz.newsapp
 
 import org.junit.Test
 

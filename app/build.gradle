@@ -16,6 +16,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", 'API_KEY', "\"8e19c72fab8047669c2357e8a288ffa6\"")
+        }
+
+        debug {
+            buildConfigField("String", 'API_KEY', "\"8e19c72fab8047669c2357e8a288ffa6\"")
         }
     }
 
@@ -35,10 +40,16 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$appCompat"
+
+    //Kotlin extensions
     implementation "androidx.core:core-ktx:$kotlinktx"
+
+    //AppCompat and Material Design
+    implementation "androidx.appcompat:appcompat:$appCompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraint"
     implementation "com.google.android.material:material:$material"
+
+    //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
 
@@ -60,5 +71,14 @@ dependencies {
 
     //WorkManager
     implementation "androidx.work:work-runtime-ktx:$work_version"
+
+    //Network Libraries
+    def retrofit = '2.5.0'
+    def interceptor = '3.12.1'
+    def coroutinesAdapter = '0.9.2'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$interceptor"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutinesAdapter"
 
 }
