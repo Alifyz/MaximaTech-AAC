@@ -34,7 +34,7 @@ object ApiFactory {
         .addInterceptor(authInterceptor)
         .build()
 
-    fun getRetrofitInstance() : Retrofit = Retrofit.Builder()
+    private fun getRetrofitInstance() : Retrofit = Retrofit.Builder()
         .client(client)
         .baseUrl("https://newsapi.org/v2/")
         .addConverterFactory(GsonConverterFactory.create())

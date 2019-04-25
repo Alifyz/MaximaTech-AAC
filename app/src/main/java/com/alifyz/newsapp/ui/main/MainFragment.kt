@@ -1,3 +1,5 @@
 package com.alifyz.newsapp.main
 
-class MainFragment
+import androidx.fragment.app.Fragment
+
+class MainFragment : Fragment()
