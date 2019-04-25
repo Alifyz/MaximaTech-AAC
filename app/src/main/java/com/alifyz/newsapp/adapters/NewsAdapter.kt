@@ -1,4 +1,4 @@
-package com.alifyz.newsapp.utils
+package com.alifyz.newsapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,7 @@ class NewsAdapter(val articles : List<Article>) : RecyclerView.Adapter<NewsAdapt
     }
 
     override fun getItemCount(): Int {
-       return articles.size
+        return articles.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
