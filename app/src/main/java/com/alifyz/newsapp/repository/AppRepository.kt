@@ -1,25 +1,17 @@
 package com.alifyz.newsapp.repository
 
-import android.util.Log
-import com.alifyz.newsapp.api.ApiFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import android.content.Context
+import androidx.lifecycle.LiveData
+import com.alifyz.newsapp.data.AppDatabase
+import com.alifyz.newsapp.data.entity.Article
 
-class AppRepository {
+class AppRepository(context : Context) {
 
-    fun getHeadlines() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val service = ApiFactory.newsApi.getHeadlines()
-            withContext(Dispatchers.Main) {
-                val request = service.await()
-                if(request.isSuccessful) {
-                    Log.d("Request: ", request.toString())
-                } else{
-                    Log.d("Request: Error ", request.toString())
-                }
-            }
-        }
+    val database : AppDatabase by lazy {
+        AppDatabase.getInstance(context)
+    }
+
+    fun getHeadlines() : LiveData<List<Article>> {
+        return database.DAO().loadAllNews()
     }
 }

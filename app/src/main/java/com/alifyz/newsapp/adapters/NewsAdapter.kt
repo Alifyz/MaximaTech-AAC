@@ -25,6 +25,7 @@ class NewsAdapter(val articles : List<Article>) : RecyclerView.Adapter<NewsAdapt
 
         holder.title.text = currentArticle.title
         holder.description.text = currentArticle.description
+
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

@@ -1,3 +1,3 @@
-package com.alifyz.newsapp.details
+package com.alifyz.newsapp.ui.details
 
 class DetailsFragment

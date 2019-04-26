@@ -1,4 +1,4 @@
-package com.alifyz.newsapp.main
+package com.alifyz.newsapp.ui.main
 
 import androidx.fragment.app.Fragment
 
