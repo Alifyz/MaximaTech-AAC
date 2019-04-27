@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.alifyz.newsapp.data.dao.NewsDao
 import com.alifyz.newsapp.data.entity.Article
+import com.alifyz.newsapp.data.entity.Data
 import com.alifyz.newsapp.data.entity.Source
 
-@Database(entities = [Article::class, Source::class], version = 1, exportSchema = false)
+@Database(entities = [Article::class, Source::class, Data::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun DAO(): NewsDao
@@ -27,6 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
         private fun buildInstance(context: Context): AppDatabase {
             return Room
                 .databaseBuilder(context, AppDatabase::class.java, "database.db")
+                .fallbackToDestructiveMigration()
                 .build()
         }
     }

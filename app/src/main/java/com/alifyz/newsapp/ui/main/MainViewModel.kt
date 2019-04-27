@@ -15,6 +15,6 @@ class MainViewModel(
     }
 
     fun getNews(): LiveData<List<Article>> {
-        return repository.getHeadlines()
+        return repository.getCachedHeadlines()
     }
 }
