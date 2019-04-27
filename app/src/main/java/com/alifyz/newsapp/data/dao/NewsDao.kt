@@ -13,22 +13,25 @@ import com.alifyz.newsapp.data.entity.Source
 @Dao
 interface NewsDao {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    fun insert(articleList : List<Article>?)
-
     @Query("SELECT * FROM articles")
     fun loadAllNews() : LiveData<List<Article>>
 
     @Query("SELECT * FROM articles")
     fun loadAllPaginadedNews() : DataSource.Factory<Int, Article>
 
-    @Query("SELECT * from data where id = 1")
+    @Query("SELECT * from data")
     fun loadPagingData() : Data
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addNewSource(source : Source)
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addNewArticle(article : Article)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(articleList : List<Article>?)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun savePageToken(data : Data)
 
 }

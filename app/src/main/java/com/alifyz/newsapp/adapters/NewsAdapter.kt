@@ -27,6 +27,7 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
 
         Glide.with(holder.imageView.context)
             .load(currentNews?.urlToImage)
+            .error(R.drawable.nopic_homebox)
             .into(holder.imageView)
     }
 
@@ -40,7 +41,7 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Article>() {
             override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean =
-                oldItem.id == newItem.id
+                oldItem.content == newItem.content
 
             override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean =
                 oldItem == newItem

@@ -72,9 +72,10 @@ class AppRepository(context : Context) {
         return database.DAO().loadPagingData()
     }
 
-    fun updateCachedNews() {
-        //Fetch more news from the API
+    fun savePaginationData(data : Data) {
+        database.DAO().savePageToken(data)
     }
+
 
     fun insertNewSource(source : Source?) {
         source?.let {
