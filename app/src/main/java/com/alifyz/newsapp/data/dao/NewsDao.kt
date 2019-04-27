@@ -10,7 +10,7 @@ import com.alifyz.newsapp.data.entity.Article
 interface NewsDao {
 
     @Insert
-    fun insert(articleList : List<Article>)
+    fun insert(articleList : List<Article>?)
 
     @Query("SELECT * FROM articles")
     fun loadAllNews() : LiveData<List<Article>>
