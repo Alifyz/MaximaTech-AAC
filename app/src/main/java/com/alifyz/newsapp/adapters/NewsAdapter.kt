@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alifyz.newsapp.R
 import com.alifyz.newsapp.data.entity.Article
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
@@ -22,6 +24,10 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
         val currentNews = getItem(position)
         holder.title.text = currentNews?.title
         holder.description.text = currentNews?.description
+
+        Glide.with(holder.imageView.context)
+            .load(currentNews?.urlToImage)
+            .into(holder.imageView)
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
@@ -33,13 +39,11 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
     companion object {
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Article>() {
-            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-                TODO("not implemented")
-            }
+            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean =
+                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-                TODO("not implemented")
-            }
+            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean =
+                oldItem == newItem
         }
     }
 }

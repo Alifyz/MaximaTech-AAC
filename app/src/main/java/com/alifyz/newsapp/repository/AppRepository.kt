@@ -12,6 +12,7 @@ import com.alifyz.newsapp.data.AppDatabase
 import com.alifyz.newsapp.data.entity.Article
 import com.alifyz.newsapp.data.entity.Data
 import com.alifyz.newsapp.data.entity.News
+import com.alifyz.newsapp.data.entity.Source
 import com.alifyz.newsapp.paging.PaginationUtils
 import com.alifyz.newsapp.paging.PagingCallback
 import kotlinx.coroutines.*
@@ -59,7 +60,12 @@ class AppRepository(context : Context) {
     }
 
     private fun storeHeadlinesFromNetwork(news : News?){
-        Log.d("Load Completed:", "Parsing Results")
+        val articles = news?.articles
+        articles?.map {article ->
+            val source = article.source
+            insertNewSource(source)
+            insertNewArticle(article)
+        }
     }
 
     fun getPaginationData() : Data? {
@@ -68,5 +74,15 @@ class AppRepository(context : Context) {
 
     fun updateCachedNews() {
         //Fetch more news from the API
+    }
+
+    fun insertNewSource(source : Source?) {
+        source?.let {
+            database.DAO().addNewSource(source)
+        }
+    }
+
+    fun insertNewArticle(article : Article) {
+        database.DAO().addNewArticle(article)
     }
 }

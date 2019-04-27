@@ -9,7 +9,7 @@ import com.alifyz.newsapp.data.entity.Article
 import com.alifyz.newsapp.data.entity.Data
 import com.alifyz.newsapp.data.entity.Source
 
-@Database(entities = [Article::class, Source::class, Data::class], version = 2, exportSchema = false)
+@Database(entities = [Article::class, Source::class, Data::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun DAO(): NewsDao
