@@ -7,7 +7,7 @@ import com.alifyz.newsapp.repository.AppRepository
 class PagingCallback(val repository : AppRepository) : PagedList.BoundaryCallback<Article>() {
 
     var pageData = repository.getPaginationData()
-    var pageToken = pageData.lastPage
+    var pageToken = pageData?.lastPage ?: 1
 
     override fun onZeroItemsLoaded() {
        repository.fetchHeadlinesFromNetwork(pageToken)
@@ -24,6 +24,6 @@ class PagingCallback(val repository : AppRepository) : PagedList.BoundaryCallbac
     }
 
     private fun refreshPageToken() {
-        pageToken = repository.getPaginationData().lastPage
+        pageToken = repository.getPaginationData()?.lastPage ?: 1
     }
 }

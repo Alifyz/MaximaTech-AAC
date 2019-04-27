@@ -3,6 +3,7 @@ package com.alifyz.newsapp.ui.main
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.alifyz.newsapp.data.entity.Article
 import com.alifyz.newsapp.repository.AppRepository
 
@@ -16,5 +17,9 @@ class MainViewModel(
 
     fun getNews(): LiveData<List<Article>> {
         return repository.getCachedHeadlines()
+    }
+
+    fun getPaginadedNews() : LiveData<PagedList<Article>> {
+        return repository.getPaginatedHeadlines()
     }
 }

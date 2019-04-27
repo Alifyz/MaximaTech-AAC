@@ -1,6 +1,7 @@
 package com.alifyz.newsapp.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -10,8 +11,10 @@ import com.alifyz.newsapp.api.NewsApi
 import com.alifyz.newsapp.data.AppDatabase
 import com.alifyz.newsapp.data.entity.Article
 import com.alifyz.newsapp.data.entity.Data
+import com.alifyz.newsapp.data.entity.News
 import com.alifyz.newsapp.paging.PaginationUtils
 import com.alifyz.newsapp.paging.PagingCallback
+import kotlinx.coroutines.*
 
 class AppRepository(context : Context) {
 
@@ -40,15 +43,30 @@ class AppRepository(context : Context) {
         return data
     }
 
-    fun fetchHeadlinesFromNetwork(pageToken : Int = 1) {
+    fun fetchHeadlinesFromNetwork(pageId : Int = 1) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val endpoint = webService.fetchNews(pageToken = pageId.toString())
+            withContext(Dispatchers.Main){
+                val request = endpoint.await()
+                if(request.isSuccessful) {
+                    storeHeadlinesFromNetwork(request.body())
+                } else{
+                    Log.e("Status: ${request.code()}:", request.message())
+                }
+            }
 
+        }
     }
 
-    fun getPaginationData() : Data {
+    private fun storeHeadlinesFromNetwork(news : News?){
+        Log.d("Load Completed:", "Parsing Results")
+    }
+
+    fun getPaginationData() : Data? {
         return database.DAO().loadPagingData()
     }
 
     fun updateCachedNews() {
-
+        //Fetch more news from the API
     }
 }
