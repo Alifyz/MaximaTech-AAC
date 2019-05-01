@@ -55,35 +55,34 @@ class AppRepository(context : Context) {
                     Log.e("Status: ${request.code()}:", request.message())
                 }
             }
-
         }
     }
 
     private fun storeHeadlinesFromNetwork(news : News?){
         val articles = news?.articles
         articles?.map {article ->
-            val source = article.source
-            insertNewSource(source)
-            insertNewArticle(article)
+           addNewsAndSources(article, article.source ?:
+           Source(newsId = article.hashCode(), sourceId = "Desconhecido", name = "Desconhecido"))
         }
     }
 
-    fun getPaginationData() : Data? {
-        return database.DAO().loadPagingData()
+    fun addNewsAndSources(article : Article, source : Source) {
+        CoroutineScope(Dispatchers.IO).launch {
+            database.DAO().insertNewsAndSource(article, source)
+        }
+    }
+
+    fun getPaginationData() : Data?  = runBlocking{
+        getAsyncData().await()
+    }
+
+    private fun getAsyncData() = CoroutineScope(Dispatchers.IO).async {
+        database.DAO().loadPagingData()
     }
 
     fun savePaginationData(data : Data) {
-        database.DAO().savePageToken(data)
-    }
-
-
-    fun insertNewSource(source : Source?) {
-        source?.let {
-            database.DAO().addNewSource(source)
+        CoroutineScope(Dispatchers.IO).launch {
+            database.DAO().savePageToken(data)
         }
-    }
-
-    fun insertNewArticle(article : Article) {
-        database.DAO().addNewArticle(article)
     }
 }

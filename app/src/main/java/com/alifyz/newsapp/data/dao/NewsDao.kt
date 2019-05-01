@@ -2,10 +2,7 @@ package com.alifyz.newsapp.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.alifyz.newsapp.data.entity.Article
 import com.alifyz.newsapp.data.entity.Data
 import com.alifyz.newsapp.data.entity.Source
@@ -29,9 +26,11 @@ interface NewsDao {
     fun addNewArticle(article : Article)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(articleList : List<Article>?)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun savePageToken(data : Data)
 
+    @Transaction
+    fun insertNewsAndSource(article : Article, source : Source) {
+        addNewArticle(article)
+        addNewSource(source)
+    }
 }

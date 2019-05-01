@@ -9,7 +9,7 @@ import com.alifyz.newsapp.data.entity.Article
 import com.alifyz.newsapp.data.entity.Data
 import com.alifyz.newsapp.data.entity.Source
 
-@Database(entities = [Article::class, Source::class, Data::class], version = 10, exportSchema = false)
+@Database(entities = [Article::class, Source::class, Data::class], version = 11, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun DAO(): NewsDao
@@ -29,7 +29,6 @@ abstract class AppDatabase : RoomDatabase() {
             return Room
                 .databaseBuilder(context, AppDatabase::class.java, "database.db")
                 .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
                 .build()
         }
     }

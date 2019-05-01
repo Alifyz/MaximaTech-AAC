@@ -4,6 +4,7 @@ import com.alifyz.newsapp.BuildConfig
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -28,10 +29,16 @@ object ApiFactory {
         chain.proceed(newRequest)
     }
 
+    //HTTP Logger Interceptor
+    private val logger = HttpLoggingInterceptor()
+        .setLevel(HttpLoggingInterceptor.Level.BODY)
+
+
     //Cliente HTTP
     private val client = OkHttpClient()
         .newBuilder()
         .addInterceptor(authInterceptor)
+        .addInterceptor(logger)
         .build()
 
     private fun getRetrofitInstance() : Retrofit = Retrofit.Builder()
