@@ -15,10 +15,6 @@ class MainViewModel(
         AppRepository(applicationContext)
     }
 
-    fun getNews(): LiveData<List<Article>> {
-        return repository.getCachedHeadlines()
-    }
-
     fun getPaginadedNews() : LiveData<PagedList<Article>> {
         return repository.getPaginatedHeadlines()
     }

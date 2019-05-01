@@ -26,10 +26,6 @@ class AppRepository(context : Context) {
         ApiFactory.newsApi
     }
 
-    fun getCachedHeadlines() : LiveData<List<Article>> {
-        return database.DAO().loadAllNews()
-    }
-
     fun getPaginatedHeadlines() : LiveData<PagedList<Article>> {
 
         val dataSource = database.DAO().loadAllPaginadedNews()
