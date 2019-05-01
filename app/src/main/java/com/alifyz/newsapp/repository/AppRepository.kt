@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.alifyz.newsapp.adapters.NewsAdapter
 import com.alifyz.newsapp.api.ApiFactory
 import com.alifyz.newsapp.api.NewsApi
 import com.alifyz.newsapp.data.AppDatabase
@@ -51,7 +50,7 @@ class AppRepository(context : Context) {
                 val request = endpoint.await()
                 if(request.isSuccessful) {
                     storeHeadlinesFromNetwork(request.body())
-                } else{
+                } else {
                     Log.e("Status: ${request.code()}:", request.message())
                 }
             }

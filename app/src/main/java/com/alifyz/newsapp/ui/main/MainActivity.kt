@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        /*val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         val adapter = NewsAdapter()
 
         viewModel.getPaginadedNews().observe(this, Observer {
@@ -24,6 +24,6 @@ class MainActivity : AppCompatActivity() {
         })
 
         recyclerview.adapter = adapter
-        recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.layoutManager = LinearLayoutManager(this)*/
     }
 }
