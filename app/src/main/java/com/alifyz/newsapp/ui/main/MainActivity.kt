@@ -18,9 +18,11 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         val adapter = NewsAdapter()
+
         viewModel.getPaginadedNews().observe(this, Observer {
             adapter.submitList(it)
         })
+
         recyclerview.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(this)
     }
