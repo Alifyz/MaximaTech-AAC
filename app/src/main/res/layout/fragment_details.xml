@@ -2,9 +2,62 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <FrameLayout
+                android:id="@+id/news_container"
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+
+            <ImageView
+                    android:id="@+id/news_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/news_image"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            <View
+                    android:id="@+id/scrim"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_scrim"/>
+
+            <TextView
+                    android:id="@+id/news_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|start"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    tools:text="@string/news_title_example"
+                    android:textColor="@android:color/white"
+                    style="@style/TextAppearance.AppCompat.Headline"/>
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/news_card"
+                android:layout_marginTop="-16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/news_container"
+                app:cardCornerRadius="18dp">
+
+            <TextView
+                    android:id="@+id/news_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    tools:text="@string/loreipsum"/>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bar"
@@ -13,14 +66,14 @@
             android:layout_gravity="bottom"
             app:navigationIcon="@drawable/favorite"
             app:fabAlignmentMode="end"
-            android:backgroundTint="@color/colorPrimary"/>
+            android:backgroundTint="@color/colorPrimary"
+            tools:targetApi="lollipop" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@id/bar"
-            android:src="@drawable/favorite"
-            />
+            android:src="@drawable/favorite" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -31,10 +33,16 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
             .into(holder.imageView)
     }
 
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val imageView = itemView.findViewById<ImageView>(R.id.img_news)
         val title = itemView.findViewById<TextView>(R.id.txt_title)
         val description = itemView.findViewById<TextView>(R.id.txt_description)
+        val group = itemView.findViewById<RelativeLayout>(R.id.viewgroup)
+            .setOnClickListener(this)
+
+        override fun onClick(v: View?) {
+            v?.findNavController()?.navigate(R.id.action_mainFragment_to_detailsFragment)
+        }
     }
 
     companion object {

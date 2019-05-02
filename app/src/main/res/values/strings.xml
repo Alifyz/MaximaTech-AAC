@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">NewsApp</string>
     <string name="image">News image</string>
+    <string name="news_image">News Image</string>
+    <string name="loreipsum">Os usuários do Facebook em smartphones perceberão uma grande mudança em sua aparência. O redesenho, apelidado de \"FB5\" pelo CEO Mark Zuckerberg, chegará no iOS e no Android primeiro. Os usuários da versão web notarão as transformações já nos próximos dias, primeiramente nos EUA e Canadá, logo depois para o resto do mundo.  Acreditamos que a primeira impressão será: cadê o azul? Na verdade, quase todas as cores foram substituídas por espaços em branco. Esses “respiros” nos dão uma sensação que há menos desordem de modo geral. O layout de três colunas ainda está lá, com o conteúdo agora muito maior e mais legível. O cabeçalho do site facilita o salto entre as seções (Notificações, Grupos, Messenger e Facebook Watch). Mas você não gosta de todo aquele branco? Não se preocupe, também há um modo escuro.</string>
+    <string name="news_title_example">Seu app do Facebook já está de cara nova? Dicas de como usar o novo design da rede social</string>
 </resources>
