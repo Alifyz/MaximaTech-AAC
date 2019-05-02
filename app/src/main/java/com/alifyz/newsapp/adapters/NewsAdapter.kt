@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alifyz.newsapp.R
 import com.alifyz.newsapp.data.entity.Article
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
@@ -41,7 +41,12 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
             .setOnClickListener(this)
 
         override fun onClick(v: View?) {
-            v?.findNavController()?.navigate(R.id.action_mainFragment_to_detailsFragment)
+            val selectedNews = getItem(adapterPosition)
+            val bundle = bundleOf(
+                "title" to selectedNews?.title,
+                "content" to selectedNews?.content,
+                "image" to selectedNews?.urlToImage)
+            v?.findNavController()?.navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
         }
     }
 

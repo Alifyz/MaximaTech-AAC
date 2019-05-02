@@ -22,5 +22,18 @@
             tools:layout="@layout/fragment_details"
             android:id="@+id/detailsFragment"
             android:name="com.alifyz.newsapp.ui.details.DetailsFragment"
-            android:label="DetailsFragment"/>
+            android:label="DetailsFragment">
+        <argument
+                android:name="title"
+                app:argType="string"
+                />
+        <argument
+                android:name="content"
+                app:argType="string"
+                />
+        <argument
+                android:name="image"
+                app:argType="string"
+                />
+    </fragment>
 </navigation>

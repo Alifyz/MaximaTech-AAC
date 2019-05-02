@@ -7,9 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <FrameLayout
                 android:id="@+id/news_container"
@@ -46,18 +49,20 @@
                 android:id="@+id/news_card"
                 android:layout_marginTop="-16dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="400dp"
                 android:layout_below="@id/news_container"
                 app:cardCornerRadius="18dp">
 
             <TextView
                     android:id="@+id/news_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     tools:text="@string/loreipsum"/>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
+    </ScrollView>
+
 
     <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bar"
@@ -74,6 +79,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@id/bar"
-            android:src="@drawable/favorite" />
+            android:src="@drawable/news" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
