@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/navigation_graph"
-            app:startDestination="@id/mainFragment">
+            app:startDestination="@id/mainFragment"
+        >
 
     <fragment
+            tools:layout="@layout/fragment_main"
             android:id="@+id/mainFragment"
             android:name="com.alifyz.newsapp.ui.main.MainFragment"
             android:label="MainFragment">
@@ -14,6 +17,7 @@
     </fragment>
 
     <fragment
+            tools:layout="@layout/fragment_details"
             android:id="@+id/detailsFragment"
             android:name="com.alifyz.newsapp.ui.details.DetailsFragment"
             android:label="DetailsFragment"/>
