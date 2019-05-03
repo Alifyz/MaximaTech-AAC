@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_details.*
 class DetailsFragment : Fragment(), Toolbar.OnMenuItemClickListener {
 
     lateinit var viewModel: DetailsViewModel
-    lateinit var binding : FragmentDetailsBinding
+    lateinit var binding: FragmentDetailsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -39,13 +39,12 @@ class DetailsFragment : Fragment(), Toolbar.OnMenuItemClickListener {
 
         viewModel.searchNews(id).observe(this, Observer { currentArticle ->
             binding.news = currentArticle
-            currentArticle.urlToImage?.let {url ->
+            currentArticle.urlToImage?.let { url ->
                 news_image.loadRemote(url)
             }
         })
 
-
-      fab.setOnClickListener {
+        fab.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setData(Uri.parse(binding.news?.url))
             startActivity(intent)
