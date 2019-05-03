@@ -6,4 +6,6 @@
     <string name="news_title_example">Seu app do Facebook já está de cara nova? Dicas de como usar o novo design da rede social</string>
     <string name="settings_menu">Configurações</string>
     <string name="btn_imageProcessing">Processar Imagem</string>
+    <string name="settings_title">Worker Status</string>
+    <string name="woker_status">Não Iniciado</string>
 </resources>

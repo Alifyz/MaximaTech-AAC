@@ -32,4 +32,29 @@
                 android:text="@string/btn_imageProcessing"/>
     </androidx.cardview.widget.CardView>
 
+    <TextView
+            android:text="@string/settings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="76dp"
+            style="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintTop_toBottomOf="@+id/cardview"/>
+
+    <TextView
+            android:text="@string/woker_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/worker_status"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
