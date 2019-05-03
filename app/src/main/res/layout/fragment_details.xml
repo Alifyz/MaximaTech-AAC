@@ -1,84 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <data>
+        <variable
+                name="news"
+                type="com.alifyz.newsapp.data.entity.Article"/>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-        <FrameLayout
-                android:id="@+id/news_container"
+        <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="400dp">
+                android:layout_height="match_parent">
 
-            <ImageView
-                    android:id="@+id/news_image"
+            <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/news_image"
-                    android:scaleType="centerCrop"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
-            <View
-                    android:id="@+id/scrim"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/background_scrim"/>
+                    android:layout_height="wrap_content">
 
-            <TextView
-                    android:id="@+id/news_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|start"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    tools:text="@string/news_title_example"
-                    android:textColor="@android:color/white"
-                    style="@style/TextAppearance.AppCompat.Headline"/>
-        </FrameLayout>
+                <FrameLayout
+                        android:id="@+id/news_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp">
 
-        <androidx.cardview.widget.CardView
-                android:id="@+id/news_card"
-                android:layout_marginTop="-16dp"
+                    <ImageView
+                            android:id="@+id/news_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/news_image"
+                            android:scaleType="centerCrop"
+                            tools:srcCompat="@tools:sample/backgrounds/scenic"/>
+
+                    <View
+                            android:id="@+id/scrim"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/background_scrim"/>
+
+                    <TextView
+                            android:id="@+id/news_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|start"
+                            android:layout_marginBottom="24dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            tools:text="@string/news_title_example"
+                            android:text="@{news.title}"
+                            android:textColor="@android:color/white"
+                            style="@style/TextAppearance.AppCompat.Headline"/>
+
+                </FrameLayout>
+
+                <androidx.cardview.widget.CardView
+                        android:id="@+id/news_card"
+                        android:layout_marginTop="-16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        android:layout_below="@id/news_container"
+                        app:cardCornerRadius="18dp">
+
+                    <TextView
+                            android:id="@+id/news_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            tools:text="@string/loreipsum"
+                            android:text="@{news.content}"/>
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </ScrollView>
+
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bar"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_below="@id/news_container"
-                app:cardCornerRadius="18dp">
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:fabAlignmentMode="end"
+                android:backgroundTint="@color/colorPrimary"
+                app:menu="@menu/bottom_menu"
+                tools:targetApi="lollipop"/>
 
-            <TextView
-                    android:id="@+id/news_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    tools:text="@string/loreipsum"/>
-        </androidx.cardview.widget.CardView>
-    </RelativeLayout>
-    </ScrollView>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_anchor="@id/bar"
+                android:src="@drawable/news"/>
 
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:fabAlignmentMode="end"
-            android:backgroundTint="@color/colorPrimary"
-            app:menu="@menu/bottom_menu"
-            tools:targetApi="lollipop" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_anchor="@id/bar"
-            android:src="@drawable/news" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

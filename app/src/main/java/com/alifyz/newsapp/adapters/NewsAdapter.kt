@@ -43,6 +43,7 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
         override fun onClick(v: View?) {
             val selectedNews = getItem(adapterPosition)
             val bundle = bundleOf(
+                "id" to selectedNews?.id,
                 "title" to selectedNews?.title,
                 "content" to selectedNews?.content,
                 "image" to selectedNews?.urlToImage,

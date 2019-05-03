@@ -19,7 +19,6 @@ class SettingsViewModel : ViewModel() {
         .setConstraints(constraints)
         .build()
 
-
     private val workStatus  : LiveData<WorkInfo>
 
     init {

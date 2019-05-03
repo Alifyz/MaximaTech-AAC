@@ -6,16 +6,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.alifyz.newsapp.R
+import com.alifyz.newsapp.data.entity.Article
+import com.alifyz.newsapp.databinding.FragmentDetailsBinding
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
 
+    lateinit var viewModel: DetailsViewModel
+    lateinit var binding : FragmentDetailsBinding
+    lateinit var article : Article
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_details, container, false)
+
+        viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
+
+        binding.news = article
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
