@@ -19,6 +19,9 @@ interface NewsDao {
     @Query("SELECT * from data")
     fun loadPagingData() : Data
 
+    @Query("SELECT * from articles where id = :id")
+    fun searchNews(id : Long) : LiveData<Article>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addNewSource(source : Source)
 

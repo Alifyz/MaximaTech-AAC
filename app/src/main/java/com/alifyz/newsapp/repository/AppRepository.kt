@@ -81,4 +81,6 @@ class AppRepository(context : Context) {
         }
     }
 
+    fun searchNews(id : Long) = database.DAO().searchNews(id)
+
 }
