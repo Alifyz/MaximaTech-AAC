@@ -80,4 +80,5 @@ class AppRepository(context : Context) {
             database.DAO().savePageToken(data)
         }
     }
+
 }
