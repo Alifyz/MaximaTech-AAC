@@ -1,5 +1,7 @@
 package com.alifyz.newsapp.ui.details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +22,17 @@ class DetailsFragment : Fragment() {
         val args = arguments
         news_content.text = args?.getString("content")
         news_title.text = args?.getString("title")
+        val link = args?.getString("link")
+
         Glide.with(this)
             .load(args?.getString("image"))
             .into(news_image)
+
+        fab.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setData(Uri.parse(link))
+            startActivity(intent)
+        }
     }
 }
+

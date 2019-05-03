@@ -45,7 +45,8 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
             val bundle = bundleOf(
                 "title" to selectedNews?.title,
                 "content" to selectedNews?.content,
-                "image" to selectedNews?.urlToImage)
+                "image" to selectedNews?.urlToImage,
+                "link" to selectedNews?.url)
             v?.findNavController()?.navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
         }
     }

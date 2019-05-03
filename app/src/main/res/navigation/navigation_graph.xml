@@ -35,5 +35,9 @@
                 android:name="image"
                 app:argType="string"
                 />
+        <argument
+                android:name="link"
+                app:argType="string"
+                />
     </fragment>
 </navigation>
