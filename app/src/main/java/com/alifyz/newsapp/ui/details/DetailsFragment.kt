@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.alifyz.newsapp.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_details.*
@@ -36,9 +37,19 @@ class DetailsFragment : Fragment() {
             intent.setData(Uri.parse(link))
             startActivity(intent)
         }
+
+        bar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.settings -> {
+                    findNavController().navigate(R.id.action_detailsFragment_to_settingsFragment)
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
     }
-
-
 
 }
 
