@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -36,27 +37,27 @@ class SettingsFragment : Fragment() {
         viewModel.workerStatus().observe(this, Observer {
             when (it.state) {
                 WorkInfo.State.ENQUEUED -> {
-                    worker_status.text = "Work Agendado"
+                    Toast.makeText(context, "Work Agendado", Toast.LENGTH_SHORT).show()
                 }
 
                 WorkInfo.State.BLOCKED -> {
-                    worker_status.text = "Work Bloqueado"
+                    Toast.makeText(context, "Work Bloqueado", Toast.LENGTH_SHORT).show()
                 }
 
                 WorkInfo.State.CANCELLED -> {
-                    worker_status.text = "Work Cancelado"
+                    Toast.makeText(context, "Work Cancelado", Toast.LENGTH_SHORT).show()
                 }
 
                 WorkInfo.State.FAILED -> {
-                    worker_status.text = "Work Falhou"
+                    Toast.makeText(context, "Work Falhou", Toast.LENGTH_SHORT).show()
                 }
 
                 WorkInfo.State.RUNNING -> {
-                    worker_status.text = "Work Rodando"
+                    Toast.makeText(context, "Work Rodando", Toast.LENGTH_SHORT).show()
                 }
 
                 WorkInfo.State.SUCCEEDED -> {
-                    worker_status.text = "Work Finalizado"
+                    Toast.makeText(context, "Work Concluído", Toast.LENGTH_SHORT).show()
                 }
             }
         })

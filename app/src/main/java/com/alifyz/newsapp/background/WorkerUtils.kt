@@ -88,7 +88,7 @@ fun makeStatusNotification(message: String, context: Context) {
  */
 fun sleep() {
     try {
-        Thread.sleep(5000, 0)
+        Thread.sleep(10000, 0)
     } catch (e: InterruptedException) {
         Log.e("WorkerUtils", e.message)
     }
@@ -106,6 +106,7 @@ fun blurBitmap(bitmap: Bitmap, applicationContext: Context): Bitmap {
     lateinit var rsContext: RenderScript
     try {
 
+        sleep()
         // Create the output bitmap
         val output = Bitmap.createBitmap(
                 bitmap.width, bitmap.height, bitmap.config)
