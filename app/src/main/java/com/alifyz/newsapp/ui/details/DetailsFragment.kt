@@ -19,6 +19,7 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val args = arguments
         news_content.text = args?.getString("content")
         news_title.text = args?.getString("title")
@@ -26,6 +27,7 @@ class DetailsFragment : Fragment() {
 
         Glide.with(this)
             .load(args?.getString("image"))
+            .error(R.drawable.nopic_homebox)
             .into(news_image)
 
         fab.setOnClickListener {

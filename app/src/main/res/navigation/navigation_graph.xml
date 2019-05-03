@@ -39,5 +39,14 @@
                 android:name="link"
                 app:argType="string"
                 />
+        <action
+                android:id="@+id/action_detailsFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment"
+                />
     </fragment>
+    <fragment
+            android:id="@+id/settingsFragment"
+            android:name="com.alifyz.newsapp.ui.settings.SettingsFragment"
+            android:label="SettingsFragment"
+            />
 </navigation>
