@@ -1,7 +1,5 @@
 package com.alifyz.newsapp.ui.details
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import com.alifyz.newsapp.R
 import com.alifyz.newsapp.data.entity.Article
 import com.alifyz.newsapp.databinding.FragmentDetailsBinding
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
 
@@ -36,7 +31,11 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args = arguments
+        val id = arguments?.getString("id")
+
+
+
+       /* val args = arguments
         news_content.text = args?.getString("content")
         news_title.text = args?.getString("title")
         val link = args?.getString("link")
@@ -62,7 +61,7 @@ class DetailsFragment : Fragment() {
                     false
                 }
             }
-        }
+        }*/
     }
 
 }
