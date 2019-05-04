@@ -436,3 +436,196 @@ class MainFragment : Fragment() {
     }
 }
 ```
+
+# Parte 8 - Configurando DetailsViewModel
+
+### ui -> details -> DetailsViewModel.kt
+
+```kotlin
+class DetailsViewModel(applicationContext: Application)  : AndroidViewModel(applicationContext) {
+
+    private val repository by lazy {
+        AppRepository(applicationContext)
+    }
+
+    fun searchNews(id : Long) = repository.searchNews(id)
+
+}
+```
+
+# Parte 9 - Configurando nossa UI Controller DetailsFragment
+
+### ui -> details -> DetailsFragment.kt
+
+```kotlin
+class DetailsFragment : Fragment(), Toolbar.OnMenuItemClickListener {
+
+    lateinit var viewModel: DetailsViewModel
+    lateinit var binding: FragmentDetailsBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val id = arguments?.getLong("id") ?: 0
+
+        viewModel.searchNews(id).observe(this, Observer { currentArticle ->
+            binding.news = currentArticle
+            currentArticle.urlToImage?.let { url ->
+                news_image.loadRemote(url)
+            }
+        })
+
+        fab.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setData(Uri.parse(binding.news?.url))
+            startActivity(intent)
+        }
+
+        bar.setOnMenuItemClickListener(this)
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.settings -> {
+                findNavController().navigate(R.id.action_detailsFragment_to_settingsFragment)
+                true
+            }
+            else -> {
+                false
+            }
+        }
+    }
+}
+```
+
+# Parte 10 - Criando um Worker (Work Manager)
+
+### background -> ImageProcessingWorker.kt
+
+```kotlin
+class ImageProcessingWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
+
+    override fun doWork(): Result {
+
+        makeStatusNotification("Processando Foto", applicationContext)
+
+        return try {
+
+            val picture = BitmapFactory.decodeResource(
+                applicationContext.resources,
+                R.drawable.galaxy
+            )
+
+            val blurImage = blurBitmap(picture, applicationContext)
+
+            val fileUri = writeBitmapToFile(applicationContext, blurImage)
+
+            makeStatusNotification("Foto Processada: $fileUri", applicationContext)
+
+            Result.success()
+
+        } catch (e: Exception) {
+
+            Result.failure()
+        }
+    }
+}
+```
+
+
+# Parte 11 - Configurando nosso SettingsViewModel
+
+### ui -> Settings -> SettingsViewModel.kt
+
+```kotlin
+class SettingsViewModel : ViewModel() {
+
+    private val constraints = Constraints.Builder()
+        .setRequiresBatteryNotLow(true)
+        .setRequiresCharging(true)
+        .setRequiredNetworkType(NetworkType.CONNECTED)
+        .setRequiresStorageNotLow(true)
+        .build()
+
+    private val worker = OneTimeWorkRequestBuilder<ImageProcessingWorker>()
+        .addTag("ImageProcessing")
+        .setConstraints(constraints)
+        .build()
+
+    private val workStatus  : LiveData<WorkInfo>
+
+    init {
+        workStatus = WorkManager.getInstance().getWorkInfoByIdLiveData(worker.id)
+    }
+
+    fun startWorker() {
+        WorkManager.getInstance().enqueue(worker)
+    }
+
+    fun workerStatus() = workStatus
+}
+```
+
+
+# Parte 12 - Fonfigurando UI Controller SettingsFragment
+
+### ui -> Settings -> SettingsFragment.kt
+
+```kotlin
+class SettingsFragment : Fragment() {
+
+    private lateinit var viewModel: SettingsViewModel
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        viewModel = ViewModelProviders.of(this).get(SettingsViewModel::class.java)
+
+        return inflater.inflate(R.layout.fragment_settings, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btn_work.setOnClickListener {
+            viewModel.startWorker()
+        }
+
+        viewModel.workerStatus().observe(this, Observer {
+            when (it.state) {
+                WorkInfo.State.ENQUEUED -> {
+                    Toast.makeText(context, "Work Agendado", Toast.LENGTH_SHORT).show()
+                }
+
+                WorkInfo.State.BLOCKED -> {
+                    Toast.makeText(context, "Work Bloqueado", Toast.LENGTH_SHORT).show()
+                }
+
+                WorkInfo.State.CANCELLED -> {
+                    Toast.makeText(context, "Work Cancelado", Toast.LENGTH_SHORT).show()
+                }
+
+                WorkInfo.State.FAILED -> {
+                    Toast.makeText(context, "Work Falhou", Toast.LENGTH_SHORT).show()
+                }
+
+                WorkInfo.State.RUNNING -> {
+                    Toast.makeText(context, "Work Rodando", Toast.LENGTH_SHORT).show()
+                }
+
+                WorkInfo.State.SUCCEEDED -> {
+                    Toast.makeText(context, "Work Concluído", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+}
+```
