@@ -1,6 +1,11 @@
 # MaximaTech-Components
+
 maxAcademy - Treinamento Android Arquitecture Components
 
+
+### NewsAPP - Preview do projeto
+
+![Navigation](https://thumbs.gfycat.com/NeighboringPresentErne-size_restricted.gif)
 
 # Fundamentos:  Criando nossa navegação
 
@@ -47,6 +52,12 @@ maxAcademy - Treinamento Android Arquitecture Components
             />
 </navigation>
 ```
+### Links Úteis
+
+* [Adicionar um NavHostFragment ao XML](https://developer.android.com/guide/navigation/navigation-getting-started#add_a_navhostfragment_via_xml)
+* [Criar um Gráfico de Navegação](https://developer.android.com/guide/navigation/navigation-getting-started#create-nav-graph)
+
+
 # Parte 1 - Configurando API Key
 
 ## build.gradle (app-level)
