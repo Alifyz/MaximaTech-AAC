@@ -16,16 +16,28 @@ import com.alifyz.newsapp.paging.PaginationUtils
 import com.alifyz.newsapp.paging.PagingCallback
 import kotlinx.coroutines.*
 
+/**
+ * Nosso repositório é a principal camada responsável por comunicar
+ * com o Banco de Dados local e com nossas API remotas.
+ * Dessa forma, para manipular e expor métodos para as camadas superiores
+ * devemos ter acesso ao objeto Database do Room e a nossa API WebService
+ */
 class AppRepository(context : Context) {
 
+    //Instância do Banco Room
     private val database : AppDatabase by lazy {
         AppDatabase.getInstance(context)
     }
 
+    //Instância do Retrofit
     private val webService : NewsApi by lazy {
         ApiFactory.newsApi
     }
 
+    //Busca por uma Notícia específica no Banco por ID
+    fun searchNews(id : Long) = database.DAO().searchNews(id)
+
+    //Retorna a DataSource do Banco Room para construir a lista paginada.
     fun getPaginatedHeadlines() : LiveData<PagedList<Article>> {
 
         val dataSource = database.DAO().loadAllPaginadedNews()
@@ -39,6 +51,7 @@ class AppRepository(context : Context) {
         return data
     }
 
+    //Método responsável por conectar a API e inserir mais notícias no banco.
     fun fetchHeadlinesFromNetwork(pageId : Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
             val endpoint = webService.fetchNews(pageToken = pageId.toString())
@@ -53,6 +66,31 @@ class AppRepository(context : Context) {
         }
     }
 
+    //Método usado para Armazenar Notícias e Fontes em forma de Transaction
+    fun addNewsAndSources(article : Article, source : Source) {
+        CoroutineScope(Dispatchers.IO).launch {
+            database.DAO().insertNewsAndSource(article, source)
+        }
+    }
+
+    //Usado pelo PagingCallback para retornar a última página visualizada.
+    fun getPaginationData() : Data?  = runBlocking{
+        CoroutineScope(Dispatchers.IO).async {
+            database.DAO().loadPagingData()
+        }.await()
+    }
+
+    //Usado pelo PagingCallback para salvar a última página visualizada.
+    fun savePaginationData(data : Data) {
+        CoroutineScope(Dispatchers.IO).launch {
+            database.DAO().savePageToken(data)
+        }
+    }
+
+    /**
+     * Usado pelo Método abaixo para Armazenar Itens no Banco após serem baixados da API
+     * @see fetchHeadlinesFromNetwork
+     */
     private fun storeHeadlinesFromNetwork(news : News?){
         val articles = news?.articles
         articles?.map {article ->
@@ -60,27 +98,4 @@ class AppRepository(context : Context) {
            Source(newsId = article.hashCode(), sourceId = "Desconhecido", name = "Desconhecido"))
         }
     }
-
-    fun addNewsAndSources(article : Article, source : Source) {
-        CoroutineScope(Dispatchers.IO).launch {
-            database.DAO().insertNewsAndSource(article, source)
-        }
-    }
-
-    fun getPaginationData() : Data?  = runBlocking{
-        getAsyncData().await()
-    }
-
-    private fun getAsyncData() = CoroutineScope(Dispatchers.IO).async {
-        database.DAO().loadPagingData()
-    }
-
-    fun savePaginationData(data : Data) {
-        CoroutineScope(Dispatchers.IO).launch {
-            database.DAO().savePageToken(data)
-        }
-    }
-
-    fun searchNews(id : Long) = database.DAO().searchNews(id)
-
 }
