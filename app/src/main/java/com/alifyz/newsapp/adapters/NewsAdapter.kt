@@ -15,10 +15,6 @@ import com.alifyz.newsapp.R
 import com.alifyz.newsapp.application.loadRemote
 import com.alifyz.newsapp.data.entity.Article
 
-/**
- * Adapter que extende a classe PagedListAdapter que foi desenvolvida para
- * integrar as funcionalidades do Paging Library com o componente RecyclerView
- */
 class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
