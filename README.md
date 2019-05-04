@@ -9,9 +9,41 @@ maxAcademy - Treinamento Android Arquitecture Components
 
 # Fundamentos:  Criando nossa navegação
 
+### Links Úteis
+
+* [Adicionar um NavHostFragment ao XML](https://developer.android.com/guide/navigation/navigation-getting-started#add_a_navhostfragment_via_xml)
+* [Criar um Gráfico de Navegação](https://developer.android.com/guide/navigation/navigation-getting-started#create-nav-graph)
+
+
 ### navigation -> new resource file -> navigation_graph.xml
 
 ![Navigation](https://uploaddeimagens.com.br/images/002/086/210/original/navigation.PNG?1556984979)
+
+
+### adicionar o novo NavHostFragment (res -> layout -> activity_main.xml)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.BaseActivity">
+
+    <fragment
+            android:id="@+id/navHost"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation_graph"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+### Arquivo de Navegação XML (res -> navigation -> navigation_graph.xml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -52,11 +84,6 @@ maxAcademy - Treinamento Android Arquitecture Components
             />
 </navigation>
 ```
-### Links Úteis
-
-* [Adicionar um NavHostFragment ao XML](https://developer.android.com/guide/navigation/navigation-getting-started#add_a_navhostfragment_via_xml)
-* [Criar um Gráfico de Navegação](https://developer.android.com/guide/navigation/navigation-getting-started#create-nav-graph)
-
 
 # Parte 1 - Configurando API Key
 
