@@ -12,9 +12,13 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alifyz.newsapp.R
+import com.alifyz.newsapp.application.loadRemote
 import com.alifyz.newsapp.data.entity.Article
-import com.bumptech.glide.Glide
 
+/**
+ * Adapter que extende a classe PagedListAdapter que foi desenvolvida para
+ * integrar as funcionalidades do Paging Library com o componente RecyclerView
+ */
 class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,14 +30,11 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
         val currentNews = getItem(position)
         holder.title.text = currentNews?.title
         holder.description.text = currentNews?.description
-
-        Glide.with(holder.imageView.context)
-            .load(currentNews?.urlToImage)
-            .error(R.drawable.nopic_homebox)
-            .into(holder.imageView)
+        holder.imageView.loadRemote(currentNews?.urlToImage)
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
         val imageView = itemView.findViewById<ImageView>(R.id.img_news)
         val title = itemView.findViewById<TextView>(R.id.txt_title)
         val description = itemView.findViewById<TextView>(R.id.txt_description)
