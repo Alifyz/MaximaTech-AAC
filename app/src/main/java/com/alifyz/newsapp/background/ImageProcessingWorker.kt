@@ -12,7 +12,7 @@ class ImageProcessingWorker(context: Context, params: WorkerParameters) : Worker
 
     override fun doWork(): Result {
 
-        makeStatusNotification("Bluring Image", applicationContext)
+        makeStatusNotification("Processando Foto", applicationContext)
 
         return try {
 
@@ -25,13 +25,12 @@ class ImageProcessingWorker(context: Context, params: WorkerParameters) : Worker
 
             val fileUri = writeBitmapToFile(applicationContext, blurImage)
 
-            makeStatusNotification("BlurImage URI: $fileUri", applicationContext)
+            makeStatusNotification("Foto Processada: $fileUri", applicationContext)
 
-            Log.d("Image Worker: ", "Job done!")
             Result.success()
 
         } catch (e: Exception) {
-            Log.d("Image Worker: ", "Job failed!")
+
             Result.failure()
         }
     }
