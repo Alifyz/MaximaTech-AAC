@@ -1,6 +1,52 @@
 # MaximaTech-Components
 maxAcademy - Treinamento Android Arquitecture Components
 
+
+# Fundamentos:  Criando nossa navegação
+
+### navigation -> new resource file -> navigation_graph.xml
+
+![Navigation](https://uploaddeimagens.com.br/images/002/086/210/original/navigation.PNG?1556984979)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_graph"
+            app:startDestination="@id/mainFragment">
+
+    <fragment
+            tools:layout="@layout/fragment_main"
+            android:id="@+id/mainFragment"
+            android:name="com.alifyz.newsapp.ui.main.MainFragment"
+            android:label="MainFragment">
+        <action
+                android:id="@+id/action_mainFragment_to_detailsFragment"
+                app:destination="@id/detailsFragment"
+                app:enterAnim="@anim/nav_default_pop_enter_anim"
+                app:exitAnim="@anim/nav_default_pop_exit_anim"
+                />
+    </fragment>
+
+    <fragment
+            tools:layout="@layout/fragment_details"
+            android:id="@+id/detailsFragment"
+            android:name="com.alifyz.newsapp.ui.details.DetailsFragment"
+            android:label="DetailsFragment">
+        <action
+                android:id="@+id/action_detailsFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment"
+                />
+    </fragment>
+    <fragment
+            tools:layout="@layout/fragment_settings"
+            android:id="@+id/settingsFragment"
+            android:name="com.alifyz.newsapp.ui.settings.SettingsFragment"
+            android:label="SettingsFragment"
+            />
+</navigation>
+```
 # Parte 1 - Configurando API Key
 
 ## build.gradle (app-level)
@@ -296,7 +342,7 @@ class PagingCallback(val repository: AppRepository) : PagedList.BoundaryCallback
 ```
 
 
-# Parte 5 - Configurando a MainViewModel & nossa UI Controller MainFragment
+# Parte 5 - Configurando a MainViewModel
 
 ### ui -> main -> MainViewModel.kt
 
@@ -311,31 +357,6 @@ class MainViewModel(
 
     fun getPaginadedNews() : LiveData<PagedList<Article>> {
         return repository.getPaginatedHeadlines()
-    }
-}
-```
-### ui -> main -> MainFragment.kt
-
-```kotlin
-class MainFragment : Fragment() {
-
-    private val adapter = NewsAdapter()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
-        viewModel.getPaginadedNews().observe(this, Observer {
-            adapter.submitList(it)
-        })
-
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(context)
     }
 }
 ```
@@ -388,3 +409,30 @@ class NewsAdapter : PagedListAdapter<Article, NewsAdapter.ViewHolder>(DIFF_CALLB
 }
 ```
 
+# Parte 7 - Configurando nossa UI Controller (MainFragment)
+
+ui -> main -> MainFragment.kt
+
+```kotlin
+class MainFragment : Fragment() {
+
+    private val adapter = NewsAdapter()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
+        viewModel.getPaginadedNews().observe(this, Observer {
+            adapter.submitList(it)
+        })
+
+        return inflater.inflate(R.layout.fragment_main, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+    }
+}
+```
