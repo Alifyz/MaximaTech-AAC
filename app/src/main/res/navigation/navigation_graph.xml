@@ -23,26 +23,6 @@
             android:id="@+id/detailsFragment"
             android:name="com.alifyz.newsapp.ui.details.DetailsFragment"
             android:label="DetailsFragment">
-        <argument
-                android:name="title"
-                app:argType="string"
-                app:nullable="true"
-                />
-        <argument
-                android:name="content"
-                app:argType="string"
-                app:nullable="true"
-                />
-        <argument
-                android:name="image"
-                app:argType="string"
-                app:nullable="true"
-                />
-        <argument
-                android:name="link"
-                app:argType="string"
-                app:nullable="true"
-                />
         <action
                 android:id="@+id/action_detailsFragment_to_settingsFragment"
                 app:destination="@id/settingsFragment"
