@@ -1,6 +1,6 @@
-# MaximaTech-Components
+# Workshop-Components
 
-maxAcademy - Treinamento Android Arquitecture Components
+Treinamento Android Arquitecture Components
 
 
 ### NewsAPP - Preview do projeto
