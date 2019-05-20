@@ -30,7 +30,7 @@ Implementar as Instruções abaixo e abrir um pull-request para **master**
 
 O principal objetivo do Codelab é a exibição de uma Lista (RecyclerView) que extrai informações de uma tabela do Banco de Dados Room, usando a arquitetura descrita neste artigo: [Guia de Arquitetura - Android](https://developer.android.com/jetpack/docs/guide?hl=pt-br), com isso sua implementação deve conter um Fragment, ViewModel, LiveData, Repositório e etc. 
 
-O uso do Navigation Component será aplicado para que o usuário possa navegar entre as diferentes telas do aplicativo para o novo Fragment criado por você, você está livre para implementar o acesso a esta nova tela por meio de Menus da ActionBar, BottomNavigationBar, ou NavigationDrawer. 
+O uso do Navigation Component será aplicado para que o usuário possa navegar entre as diferentes telas do aplicativo para o novo Fragment criado por você, você está livre para implementar o acesso a esta nova tela por meio de **Menus da ActionBar**, **BottomNavigationBar**, ou **NavigationDrawer.**
 
 # Fundamentos:  Criando nossa navegação
 
