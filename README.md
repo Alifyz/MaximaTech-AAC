@@ -10,14 +10,20 @@ Treinamento Android Arquitecture Components
 
 ### Lista de Exercícios do Codelab
 
+![GitHub Logo](https://media.giphy.com/media/itOuxcFvgYjWE/giphy.gif)
+
 Instruções: Criar uma nova branch a partir da **master** com o seguinte template: codelab/nome
 
 Implementar as Instruções abaixo e abrir um pull-request para **master**
 
 1 - Crie uma nova Tabela chamada **(LocalNews)** usando Room para Armazenar Notícias Locais inseridas pelo usuário
+
 2 - Criar um Fragment que exibira uma lista (RecyclerView) que extrairá informações da tabela **(LocalNews)**
+
 3 - Crie um novo Fragment que dê suporte ao usuário (Layout com Input Widgets) para adicionar uma nova Notícia Local **(Armazenar na nova Tabela criada no passo - 1)**
+
 4 - Usar o **Navigation Component** para navegar até o novo Fragmento. 
+
 5 - Usar o **WorkManager** para ler uma notícia aleatória da Tabela **(LocalNews)**, e exibir uma notificação para o Usuário. 
 
 ## Dicas 
